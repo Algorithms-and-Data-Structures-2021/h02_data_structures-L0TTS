@@ -70,27 +70,27 @@ namespace itis {
         // напишите свой код здесь ...
         Node *answer = find_node(index);
         if (index == 0 && head_ == tail_) {
-            delete find_node(index);
+            delete[] find_node(index);
             head_ = nullptr;
             tail_ = nullptr;
             size_--;
             return answer->data;
         }
         if (index == size_ - 1) {
-            delete find_node(index);
+            delete[] find_node(index);
             tail_ = find_node(index - 1);
             tail_->next = nullptr;
             size_--;
             return answer->data;
         }
         if (index == 0) {
-            delete find_node(index);
+            delete[] find_node(index);
             head_ = find_node(1);
             size_--;
             return answer->data;
         }
         find_node(index - 1)->next = find_node(index + 1);
-        delete find_node(index);
+        delete[] find_node(index);
         size_--;
         return answer->data;
     }
