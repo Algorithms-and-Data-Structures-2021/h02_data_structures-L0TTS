@@ -69,32 +69,36 @@ namespace itis {
         // Tip 2: используйте функцию find_node(index)
         // напишите свой код здесь ...
         Element answer = Element ::UNINITIALIZED;
-        if (index == 0 && head_ == tail_) {
-            delete[] find_node(index);
-            head_ = nullptr;
-            tail_ = nullptr;
-            size_--;
-            return answer;
+        if(index == 0){
+            if(size_ == 1) {
+                answer = head_->data;
+                delete head_;
+                head_ = nullptr;
+                tail_ = nullptr;
+            }
+            else{
+                Node* node = head_->next;\
+                answer = head_->data;
+                delete head_;
+                head_ = node;
+            }
         }
-        if (index == size_ - 1) {
-            delete[] find_node(index);
-            tail_ = find_node(index - 1);
+        else if(index == size_-1){
+            tail_ = find_node(index-1);
+            answer = tail_->next->data;
+            delete tail_->next;
             tail_->next = nullptr;
-            size_--;
-            return answer;
         }
-        if (index == 0) {
-            delete[] find_node(index);
-            head_ = find_node(1);
-            size_--;
-            return answer;
+        else{
+            Node* node = find_node(index-1);
+            Node* node1 = node->next;
+            node->next = node1->next;
+            answer = node1->data;
+            delete node1;
         }
-        find_node(index - 1)->next = find_node(index + 1);
-        delete[] find_node(index);
         size_--;
         return answer;
     }
-
     void LinkedList::Clear() {
         // Tip 1: люди в черном (MIB) пришли стереть вам память
         // напишите свой код здесь ...
