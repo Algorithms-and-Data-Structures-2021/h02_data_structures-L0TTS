@@ -68,31 +68,31 @@ namespace itis {
         // Tip 1: рассмотрите случай, когда удаляется элемент в начале списка
         // Tip 2: используйте функцию find_node(index)
         // напишите свой код здесь ...
-        Node *answer = find_node(index);
+        Element answer = Element ::UNINITIALIZED;
         if (index == 0 && head_ == tail_) {
             delete[] find_node(index);
             head_ = nullptr;
             tail_ = nullptr;
             size_--;
-            return answer->data;
+            return answer;
         }
         if (index == size_ - 1) {
             delete[] find_node(index);
             tail_ = find_node(index - 1);
             tail_->next = nullptr;
             size_--;
-            return answer->data;
+            return answer;
         }
         if (index == 0) {
             delete[] find_node(index);
             head_ = find_node(1);
             size_--;
-            return answer->data;
+            return answer;
         }
         find_node(index - 1)->next = find_node(index + 1);
         delete[] find_node(index);
         size_--;
-        return answer->data;
+        return answer;
     }
 
     void LinkedList::Clear() {
