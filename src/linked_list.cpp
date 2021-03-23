@@ -14,9 +14,7 @@ namespace itis {
         // напишите свой код здесь ...
 
         Node *node = new Node(e, nullptr);
-
         if (head_ == nullptr) {
-            assert(tail_ == nullptr && size_ == 0);
             head_ = node;
             tail_ = node;
         } else {
@@ -102,15 +100,14 @@ namespace itis {
     void LinkedList::Clear() {
         // Tip 1: люди в черном (MIB) пришли стереть вам память
         // напишите свой код здесь ...
-        Node *node = head_;
-        while (node != nullptr) {
-            Node *temp = node->next;
-            delete[] node;
-            node = temp;
+        int size = size_;
+        for(int i = 0; i < size; i++){
+            Node *temp = head_->next;
+            delete head_;
+            head_ = temp;
+            size_--;
         }
-        head_ = nullptr;
         tail_ = nullptr;
-        size_ = 0;
     }
 
     Element LinkedList::Get(int index) const {
